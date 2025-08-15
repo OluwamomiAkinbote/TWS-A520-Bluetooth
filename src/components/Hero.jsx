@@ -1,12 +1,28 @@
-import React from 'react';
+'use client'
+
+import React, { useEffect, useRef } from 'react';
 import { Volume2, Activity, Touchpad, Headphones, Bluetooth } from 'lucide-react';
 
 const Hero = () => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    // Force autoplay programmatically for iOS/Android
+    if (videoRef.current) {
+      videoRef.current
+        .play()
+        .catch(() => {
+          // Autoplay blocked, nothing to do (poster will show)
+        });
+    }
+  }, []);
+
   return (
     <div className="w-full min-h-screen bg-black flex flex-col lg:flex-row items-center">
       {/* Video Section - Left Side */}
-      <div className="lg:w-1/2 h-[60vh] lg:h-screen relative">
-        <video 
+      <div className="lg:w-1/2 h-screen relative">
+        <video
+          ref={videoRef}
           autoPlay
           loop
           muted
@@ -14,7 +30,7 @@ const Hero = () => {
           className="w-full h-full object-cover"
           poster="/images/image-10.png"
         >
-          <source src="/images/Motion-video.mp4" type="video/mp4" />
+          <source src="/images/Motion-video.mp4" type="video/mp4" playsInline />
         </video>
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent lg:hidden"></div>
       </div>
