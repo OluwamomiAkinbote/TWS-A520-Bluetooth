@@ -1,73 +1,68 @@
 import React from 'react';
-import { Headphones, Volume2, Wifi, Droplets, Touchpad, Ear } from 'lucide-react';
-import Image from 'next/image';
+import { Volume2, Activity, Touchpad, Headphones, Bluetooth } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black">
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0 opacity-90">
-        <video
+    <div className="w-full min-h-screen bg-black flex flex-col lg:flex-row items-center">
+      {/* Video Section - Left Side */}
+      <div className="lg:w-1/2 h-[60vh] lg:h-screen relative">
+        <video 
           autoPlay
           loop
           muted
           playsInline
           className="w-full h-full object-cover"
-          poster="/images/image-1.jpg"
+          poster="/images/image-10.png"
         >
-          <source src="/images/Motion-Video.mp4" type="video/mp4" />
+          <source src="/images/Motion-video.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent lg:hidden"></div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-end pb-20 px-6 sm:px-12 lg:px-24">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500">
-            UNLEASH YOUR SOUND
+      {/* Content Section - Right Side */}
+      <div className="lg:w-1/2 p-8 sm:p-12 lg:p-16">
+        <div className="max-w-lg mx-auto">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500">
+            Sound That Moves You
           </h1>
-          <p className="text-xl sm:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto">
-            The A520 Wireless - Where crystal clear audio meets uncompromising comfort
+          <p className="text-xl text-gray-300 mb-10">
+            The A520 wireless headphones deliver studio-quality sound with the freedom to move. 
+            Built for your active lifestyle without compromising on audio.
           </p>
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-left">
+          <div className="space-y-5 mb-12">
             <FeatureItem 
-              icon={<Volume2 className="w-6 h-6" />} 
-              title="HD Stereo Sound" 
-              text="Crystal-clear audio with premium drivers"
+              icon={<Volume2 className="text-amber-400" size={20} />}
+              title="Premium Audio"
+              text="HD stereo sound with deep bass and crisp highs"
             />
             <FeatureItem 
-              icon={<Droplets className="w-6 h-6" />} 
-              title="Sweat-Resistant" 
-              text="Perfect for intense workouts"
+              icon={<Activity className="text-amber-400" size={20} />}
+              title="Sweatproof"
+              text="Workout-ready protection against sweat and rain"
             />
             <FeatureItem 
-              icon={<Touchpad className="w-6 h-6" />} 
-              title="Touch Controls" 
-              text="Effortless music and call management"
+              icon={<Touchpad className="text-amber-400" size={20} />}
+              title="Smart Touch"
+              text="Intuitive controls for music and calls"
             />
             <FeatureItem 
-              icon={<Ear className="w-6 h-6" />} 
-              title="Noise Isolation" 
-              text="Immersive listening experience"
+              icon={<Headphones className="text-amber-400" size={20} />}
+              title="All-Day Comfort"
+              text="Ergonomic design that stays comfortable"
             />
             <FeatureItem 
-              icon={<Wifi className="w-6 h-6" />} 
-              title="Bluetooth 5.3" 
-              text="Stable wireless connection"
-            />
-            <FeatureItem 
-              icon={<Headphones className="w-6 h-6" />} 
-              title="All-Day Comfort" 
-              text="Ergonomic earplug design"
+              icon={<Bluetooth className="text-amber-400" size={20} />}
+              title="Wireless Freedom"
+              text="Bluetooth 5.3 with stable, long-range connection"
             />
           </div>
 
-          {/* CTA */}
-          <button className="mt-16 px-10 py-4 bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-bold rounded-full text-lg hover:from-yellow-400 hover:to-amber-500 transition-all duration-300 shadow-lg shadow-amber-500/20">
-            SHOP NOW
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button className="px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold rounded-full hover:shadow-lg hover:shadow-amber-500/30 transition-all">
+              Shop Now
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -75,11 +70,13 @@ const Hero = () => {
 };
 
 const FeatureItem = ({ icon, title, text }) => (
-  <div className="flex items-start space-x-3">
-    <div className="text-amber-400 mt-1">{icon}</div>
+  <div className="flex items-start gap-4">
+    <div className="p-2 rounded-lg bg-amber-400/10 border border-amber-400/20">
+      {icon}
+    </div>
     <div>
-      <h3 className="font-bold text-amber-400">{title}</h3>
-      <p className="text-gray-300 text-sm">{text}</p>
+      <h3 className="font-semibold text-amber-400">{title}</h3>
+      <p className="text-gray-300">{text}</p>
     </div>
   </div>
 );
