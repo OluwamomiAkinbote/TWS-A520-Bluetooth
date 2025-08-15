@@ -81,3 +81,5 @@ const FeatureItem = ({ icon, title, text }) => (
 );
 
 export default Hero;
+
+
