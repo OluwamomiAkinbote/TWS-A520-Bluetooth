@@ -13,13 +13,6 @@ const FloatingContactWidget = () => {
 
   const contactOptions = [
     {
-      name: 'WhatsApp',
-      icon: <MessageCircle className="w-6 h-6" />,
-      color: 'bg-green-500 hover:bg-green-600',
-      action: () => window.open('https://wa.me/2348089206714', '_blank'),
-      description: 'Chat instantly on WhatsApp',
-    },
-    {
       name: 'WhatsApp Business',
       icon: <MessageCircle className="w-6 h-6" />,
       color: 'bg-teal-600 hover:bg-teal-700',
@@ -30,7 +23,7 @@ const FloatingContactWidget = () => {
       name: 'Call Us',
       icon: <Phone className="w-6 h-6" />,
       color: 'bg-emerald-600 hover:bg-emerald-700',
-      action: () => window.open('tel:+2348089206714', '_blank'),
+      action: () => window.open('tel:+2348051230133', '_blank'),
       description: 'Speak directly with us',
     },
   ];
