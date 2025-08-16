@@ -10,7 +10,7 @@ const images = [
   { id: 3, src: '/images/image-03.jpg', alt: 'TWS A520 Product View 3' },
   { id: 4, src: '/images/image-04.jpg', alt: 'TWS A520 Product View 4' },
   { id: 5, src: '/images/image-5.png', alt: 'TWS A520 Product View 5' },
-  { id: 6, src: '/images/image-6.png', alt: 'TWS A520 Product View 6' }
+  { id: 6, src: '/images/image-9.png', alt: 'TWS A520 Product View 6' }
 ];
 
 export default function ImageGallery() {
