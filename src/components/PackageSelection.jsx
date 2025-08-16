@@ -17,7 +17,7 @@ const packages = [
     features: [
       'Free Delivery Nationwide',
       'Easy Return Policy',
-      '1 Year Warranty',
+      '6 Months Warranty',
       'Original TWS A520'
     ]
   },
@@ -33,7 +33,7 @@ const packages = [
     features: [
       'Free Delivery Nationwide',
       'Easy Return Policy',
-      '1 Year Warranty',
+      '6 Months Warranty',
       'Original TWS A520',
       'Save ₦22,000'
     ]
@@ -50,7 +50,7 @@ const packages = [
     features: [
       'Free Delivery Nationwide',
       'Easy Return Policy',
-      '1 Year Warranty',
+      '6 Months Warranty',
       'Original TWS A520',
       'Save ₦35,000',
       'Best Value Deal'
@@ -99,7 +99,7 @@ export default function PackageSelection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 max-w-4xl mx-auto">
           <div className="flex items-center justify-center gap-3 bg-green-900/20 text-green-400 p-4 border border-green-800/30">
             <Truck className="h-6 w-6" />
-            <span className="font-medium text-sm md:text-base">Free Delivery Nationwide</span>
+            <span className="font-medium text-sm md:text-base">Free Delivery in Lagos</span>
           </div>
           <div className="flex items-center justify-center gap-3 bg-blue-900/20 text-blue-400 p-4 border border-blue-800/30">
             <RotateCcw className="h-6 w-6" />

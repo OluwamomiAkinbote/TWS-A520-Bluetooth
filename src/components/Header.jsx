@@ -40,7 +40,7 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-2 text-gray-300">
             <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-            1 Year Warranty
+            6 Months Warranty
           </div>
           <div className="flex items-center gap-2 text-gray-300">
             <span className="w-2 h-2 bg-purple-400 rounded-full"></span>

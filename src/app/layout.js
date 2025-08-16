@@ -26,7 +26,7 @@ export const metadata = {
     siteName: 'Emerald Store',
     images: [
       {
-        url: 'https://example.com/emerald-store-favicon.png',
+        url: 'https://boltzmann.s3.us-east-1.amazonaws.com/Abstract/free-delivery.jpg',
         width: 1200,
         height: 630,
         alt: 'TWS-A520 Bluetooth 5.3 Earphones',
@@ -39,7 +39,7 @@ export const metadata = {
     title: 'TWS-A520 Bluetooth 5.3 Earphones',
     site: '@emeraldstore',
     description: 'Enjoy HiFi Stereo sound, waterproof design, and touch controls with TWS-A520 wireless earbuds.',
-    images: ['https://example.com/emerald-store-favicon.png'],
+    images: ['https://boltzmann.s3.us-east-1.amazonaws.com/Abstract/free-delivery.jpg'],
   },
   icons: {
     icon: [
