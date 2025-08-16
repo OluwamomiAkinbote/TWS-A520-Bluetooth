@@ -2,6 +2,10 @@ import Header from './Header';
 import HeroImage from './HeroImage';
 import Hero from './Hero';
 import WebImage from './WebImage';
+import Features from './Features';
+import CustomerReview from './CustomerReview';
+import PackageSelection from './PackageSelection';
+import Contact from './Contact';
 
 
 export default function Home() {
@@ -11,6 +15,10 @@ export default function Home() {
       <HeroImage />
       <Hero />
       <WebImage />
+      <Features />
+      <CustomerReview />
+      <PackageSelection />
+      <Contact />
       {/* Add other components or sections as needed */}
 
     </main>

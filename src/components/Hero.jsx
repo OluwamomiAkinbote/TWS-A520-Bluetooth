@@ -1,7 +1,19 @@
+'use client';
+
 import React from 'react';
 import { Volume2, Activity, Touchpad, Headphones, Bluetooth } from 'lucide-react';
 
 const Hero = () => {
+  const handleShopNowClick = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <div className="w-full min-h-screen bg-black flex flex-col lg:flex-row items-center">
       {/* Video Section - Left Side */}
@@ -58,7 +70,10 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold rounded-full hover:shadow-lg hover:shadow-amber-500/30 transition-all">
+            <button 
+              onClick={handleShopNowClick}
+              className="px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold rounded-full hover:shadow-lg hover:shadow-amber-500/30 transition-all cursor-pointer"
+            >
               Shop Now
             </button>
           </div>
@@ -81,5 +96,3 @@ const FeatureItem = ({ icon, title, text }) => (
 );
 
 export default Hero;
-
-

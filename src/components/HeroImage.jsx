@@ -10,7 +10,7 @@ const HeroImage = () => {
         <div className="flex flex-col space-y-8">
           <div className="relative aspect-square w-full overflow-hidden">
             <Image
-              src="/images/Water-proof-design.png"
+              src="/images/Painless-Waterproof.png"
               alt="Water-resistant A520s headphones"
               fill
               className="object-cover"
