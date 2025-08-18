@@ -4,9 +4,10 @@ import FloatingContactWidget from '@/components/FloatingContactWidget';
 export const metadata = {
   title: {
     default: 'TWS-A520 | Touch Control Bluetooth 5.3 Earphones with Mic',
-    template: '%s | TWS-A520 - Premium Wireless Earbuds'
+    template: '%s | TWS-A520 - Premium Wireless Earbuds',
   },
-  description: 'Unlock the rhythm of your life with the A520 Earphone with Microphone! HiFi Stereo Waterproof TWS with Touch Control, Bluetooth 5.3, and crystal-clear sound.',
+  description:
+    'Unlock the rhythm of your life with the A520 Earphone with Microphone! HiFi Stereo Waterproof TWS with Touch Control, Bluetooth 5.3, and crystal-clear sound.',
   keywords: [
     'TWS-A520',
     'Bluetooth 5.3 earphones',
@@ -21,7 +22,8 @@ export const metadata = {
   metadataBase: new URL('https://www.emeraldstore.com'),
   openGraph: {
     title: 'TWS-A520 | Premium Touch Control Bluetooth Earphones',
-    description: 'Dive into immersive sound with TWS-A520 HiFi Stereo Waterproof Earphones. Perfect for workouts, travel, and everyday life.',
+    description:
+      'Dive into immersive sound with TWS-A520 HiFi Stereo Waterproof Earphones. Perfect for workouts, travel, and everyday life.',
     url: 'https://www.emeraldstore.com/',
     siteName: 'Emerald Store',
     images: [
@@ -38,8 +40,11 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'TWS-A520 Bluetooth 5.3 Earphones',
     site: '@emeraldstore',
-    description: 'Enjoy HiFi Stereo sound, waterproof design, and touch controls with TWS-A520 wireless earbuds.',
-    images: ['https://boltzmann.s3.us-east-1.amazonaws.com/Abstract/free-delivery.jpg'],
+    description:
+      'Enjoy HiFi Stereo sound, waterproof design, and touch controls with TWS-A520 wireless earbuds.',
+    images: [
+      'https://boltzmann.s3.us-east-1.amazonaws.com/Abstract/free-delivery.jpg',
+    ],
   },
   icons: {
     icon: [
@@ -59,6 +64,34 @@ export default function RootLayout({ children }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Meta Pixel Code */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '1176033614217437');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=1176033614217437&ev=PageView&noscript=1"
+            alt="facebook pixel"
+          />
+        </noscript>
+        {/* End Meta Pixel Code */}
       </head>
       <body className="font-poppins min-h-screen flex flex-col bg-gradient-to-r from-[#000000] via-[#0a0a0a] to-[#000000]">
         <main className="flex-grow">
