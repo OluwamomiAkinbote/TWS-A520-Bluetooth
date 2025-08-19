@@ -60,7 +60,7 @@ const FAQ = () => {
   ];
 
   const handleGetYoursNow = () => {
-    const contactSection = document.getElementById('contact');
+    const contactSection = document.getElementById('package');
     if (contactSection) {
       contactSection.scrollIntoView({ 
         behavior: 'smooth',

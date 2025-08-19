@@ -3,7 +3,7 @@ import React from 'react';
 
 const Header = () => {
   const handleBuyNowClick = () => {
-    const contactSection = document.getElementById('contact');
+    const contactSection = document.getElementById('package');
     if (contactSection) {
       contactSection.scrollIntoView({ 
         behavior: 'smooth',

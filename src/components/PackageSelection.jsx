@@ -83,7 +83,7 @@ export default function PackageSelection() {
   };
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-black to-neutral-950">
+    <section className="relative w-full bg-gradient-to-b from-black to-neutral-950" id='package'>
       <div className="px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         {/* Section Title */}
         <div className="text-center mb-10 md:mb-14">
