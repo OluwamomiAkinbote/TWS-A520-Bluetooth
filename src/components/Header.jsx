@@ -1,4 +1,3 @@
-
 'use client';
 import React from 'react';
 
@@ -23,13 +22,12 @@ const Header = () => {
 
         {/* Main Headline */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
-          Premium Sound, <span className="text-yellow-400">Unbeatable Price</span>
+          Studio-Grade Sound, <span className="text-yellow-400">Made for Your Hustle</span>
         </h1>
         
         {/* Simple description */}
         <p className="text-xl sm:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">
-          Experience studio-quality audio, sweat-proof design, and all-day comfort. 
-          Perfect for Lagos hustle, gym sessions, and everything in between.
+          Crystal-clear audio, sweat-proof design, and all-day comfort—whether you’re in Lagos traffic, at the gym, or on the move.
         </p>
 
         {/* Key Benefits */}
@@ -54,7 +52,7 @@ const Header = () => {
             onClick={handleBuyNowClick}
             className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-gray-900 font-bold py-4 px-10 rounded-full text-lg transition-all transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-yellow-400/20"
           >
-            Get Yours Today - Free Delivery
+            Get Yours Today – Free Delivery
           </button>
         </div>
 

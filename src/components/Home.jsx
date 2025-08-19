@@ -6,7 +6,7 @@ import Features from './Features';
 import CustomerReview from './CustomerReview';
 import PackageSelection from './PackageSelection';
 import Contact from './Contact';
-import ImageGallery from './ImageGallery';
+import FAQ from './FAQ';
 
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
       <WebImage />
       <Features />
       <CustomerReview />
-      <ImageGallery />
+      <FAQ />
       
       {/* Ensure PackageSelection is included after ImageGallery */}
       <PackageSelection />
