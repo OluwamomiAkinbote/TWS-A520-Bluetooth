@@ -10,7 +10,7 @@ const features = [
     title: 'Zero Dropouts Bluetooth 5.3', 
     highlights: [
       "No more audio cuts during calls",
-      "30m stable connection range",
+      "10m stable connection range",
       "Pairs instantly to any device"
     ],
     desc: 'Crystal-clear calls and uninterrupted music - even in crowded Lagos markets or busy offices.' 
@@ -64,7 +64,7 @@ const features = [
     img: '/images/image-6.png', 
     title: 'Naira-Smart Value', 
     highlights: [
-      "Saves you ₦15,000 vs AirPods",
+      "Saves you ₦10,000 vs AirPods",
       "6-month warranty",
       "Free replacement if damaged"
     ],
@@ -85,7 +85,7 @@ export default function Features() {
             More Features Than <span className="text-yellow-400">Earbuds 2× The Price</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Here's everything you get with your ₦16,500 investment:
+            Here's everything you get with your ₦25,000 investment:
           </p>
         </div>
 
