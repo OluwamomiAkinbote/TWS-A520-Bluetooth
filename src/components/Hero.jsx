@@ -8,8 +8,11 @@ const Hero = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const images = [
-    { src: '/images/Artboard 1.png', alt: 'TWS-A520 Earbuds - Main View' },
-    { src: '/images/Artboard 2.png', alt: 'TWS-A520 Earbuds - In Case' },
+    { src: '/images/Artboard 5.png', alt: 'TWS-A520 Earbuds - Main View' },
+    { src: '/images/Artboard 6.png', alt: 'TWS-A520 Earbuds - In Case' },
+    { src: '/images/Artboard 7.png', alt: 'TWS-A520 Earbuds - Side Profile' },
+    { src: '/images/Artboard 1.png', alt: 'TWS-A520 Earbuds - Side Profile' },
+    { src: '/images/Artboard 2.png', alt: 'TWS-A520 Earbuds - Side Profile' },
     { src: '/images/Artboard 3.png', alt: 'TWS-A520 Earbuds - Side Profile' },
     { src: '/images/Artboard 4.png', alt: 'TWS-A520 Earbuds - Features' }
   ];

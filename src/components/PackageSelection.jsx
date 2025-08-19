@@ -11,7 +11,7 @@ const packages = [
     price: 25000,
     originalPrice: 35000,
     discount: '29% OFF',
-    image: '/images/image-03.jpg',
+    image: '/images/Artboard 5.png',
     popular: false,
     savings: 10000,
     features: [
