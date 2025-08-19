@@ -206,7 +206,7 @@ export default function PackageSelection() {
         {/* Bottom Note */}
         <div className="text-center mt-10 md:mt-14">
           <p className="text-neutral-400 text-sm md:text-base">
-            All packages come with 1 year warranty and 30-day money back guarantee
+            All packages come with 6 Months warranty and 30-day money back guarantee
           </p>
         </div>
       </div>
