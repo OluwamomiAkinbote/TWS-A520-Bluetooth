@@ -1,11 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Volume2, Activity, Touchpad, Headphones, Bluetooth, ChevronLeft, ChevronRight, Play, X } from 'lucide-react';
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   const images = [
     { src: '/images/Artboard 5.png', alt: 'TWS-A520 Earbuds - Main View' },
@@ -27,76 +41,81 @@ const Hero = () => {
     }
   };
 
-  const nextImage = () => {
+  const nextImage = (e) => {
+    e.stopPropagation();
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
-  const prevImage = () => {
+  const prevImage = (e) => {
+    e.stopPropagation();
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  const goToImage = (index) => {
+  const goToImage = (index, e) => {
+    e.stopPropagation();
     setCurrentImageIndex(index);
   };
 
   const openLightbox = () => {
     setIsLightboxOpen(true);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
     setIsLightboxOpen(false);
+    document.body.style.overflow = 'unset';
   };
 
   return (
     <>
       <div className="w-full min-h-screen bg-black flex flex-col lg:flex-row items-center">
         {/* Image Gallery Section - Left Side */}
-        <div className="lg:w-1/2 h-[60vh] lg:h-screen relative">
+        <div className="lg:w-1/2 h-[50vh] sm:h-[60vh] lg:h-screen relative overflow-hidden">
           {/* Main Image Display */}
           <div className="relative w-full h-full group">
             <img 
               src={images[currentImageIndex].src}
               alt={images[currentImageIndex].alt}
-              className="w-full h-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-full object-contain lg:object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
               onClick={openLightbox}
             />
             
-            {/* Gradient Overlay for mobile */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent lg:hidden"></div>
+            {/* Gradient Overlay - Responsive */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent lg:from-black/70 lg:to-transparent"></div>
 
-            {/* Navigation Arrows */}
+            {/* Navigation Arrows - Always visible on mobile, hover on desktop */}
             <button 
               onClick={prevImage}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100"
+              className="absolute left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all lg:opacity-0 lg:group-hover:opacity-100"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={isMobile ? 20 : 24} />
             </button>
             <button 
               onClick={nextImage}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100"
+              className="absolute right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all lg:opacity-0 lg:group-hover:opacity-100"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={isMobile ? 20 : 24} />
             </button>
 
-            {/* View Full Size Indicator */}
-            <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm opacity-0 group-hover:opacity-100 transition-all cursor-pointer" onClick={openLightbox}>
-              <Play className="inline w-4 h-4 mr-1" />
-              View Full Size
+            {/* View Full Size Indicator - Hidden on smallest screens */}
+            <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-black/50 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm opacity-0 group-hover:opacity-100 transition-all cursor-pointer hidden xs:block" onClick={openLightbox}>
+              <Play className="inline w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+              View Full
             </div>
 
             {/* Image Counter */}
-            <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
+            <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-black/70 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
               {currentImageIndex + 1} / {images.length}
             </div>
           </div>
 
-          {/* Thumbnail Navigation */}
-          <div className="absolute bottom-4 left-4 flex space-x-2">
+          {/* Thumbnail Navigation - Responsive */}
+          <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 flex space-x-1 sm:space-x-2 max-w-full overflow-x-auto pb-1 hide-scrollbar">
             {images.map((image, index) => (
               <button
                 key={index}
-                onClick={() => goToImage(index)}
-                className={`w-16 h-16 rounded-lg overflow-hidden transition-all border-2 ${
+                onClick={(e) => goToImage(index, e)}
+                className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded overflow-hidden transition-all border-2 ${
                   index === currentImageIndex 
                     ? 'border-amber-400 opacity-100' 
                     : 'border-transparent opacity-70 hover:opacity-100'
@@ -113,48 +132,48 @@ const Hero = () => {
         </div>
 
         {/* Content Section - Right Side */}
-        <div className="lg:w-1/2 p-8 sm:p-12 lg:p-16">
+        <div className="lg:w-1/2 p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16">
           <div className="max-w-lg mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500">
               Sound That Moves You
             </h1>
-            <p className="text-xl text-gray-300 mb-10">
+            <p className="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8 md:mb-10">
               The A520 wireless headphones deliver studio-quality sound with the freedom to move. 
               Built for your active lifestyle without compromising on audio.
             </p>
 
-            <div className="space-y-5 mb-12">
+            <div className="space-y-4 sm:space-y-5 mb-8 sm:mb-10 md:mb-12">
               <FeatureItem 
-                icon={<Volume2 className="text-amber-400" size={20} />}
+                icon={<Volume2 className="text-amber-400" size={18} />}
                 title="Premium Audio"
                 text="HD stereo sound with deep bass and crisp highs"
               />
               <FeatureItem 
-                icon={<Activity className="text-amber-400" size={20} />}
+                icon={<Activity className="text-amber-400" size={18} />}
                 title="Sweatproof"
                 text="Workout-ready protection against sweat and rain"
               />
               <FeatureItem 
-                icon={<Touchpad className="text-amber-400" size={20} />}
+                icon={<Touchpad className="text-amber-400" size={18} />}
                 title="Smart Touch"
                 text="Intuitive controls for music and calls"
               />
               <FeatureItem 
-                icon={<Headphones className="text-amber-400" size={20} />}
+                icon={<Headphones className="text-amber-400" size={18} />}
                 title="All-Day Comfort"
                 text="Ergonomic design that stays comfortable"
               />
               <FeatureItem 
-                icon={<Bluetooth className="text-amber-400" size={20} />}
+                icon={<Bluetooth className="text-amber-400" size={18} />}
                 title="Wireless Freedom"
                 text="Bluetooth 5.3 with stable, long-range connection"
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button 
                 onClick={handleShopNowClick}
-                className="px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold rounded-full hover:shadow-lg hover:shadow-amber-500/30 transition-all cursor-pointer"
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold rounded-full hover:shadow-lg hover:shadow-amber-500/30 transition-all cursor-pointer text-sm sm:text-base"
               >
                 Shop Now
               </button>
@@ -165,14 +184,20 @@ const Hero = () => {
 
       {/* Lightbox Modal */}
       {isLightboxOpen && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-4xl w-full">
+        <div 
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-2 sm:p-4"
+          onClick={closeLightbox}
+        >
+          <div 
+            className="relative max-w-4xl w-full max-h-full"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Close Button */}
             <button 
               onClick={closeLightbox}
-              className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full z-10 transition-all"
+              className="absolute -top-10 right-0 sm:top-2 sm:right-2 md:top-4 md:right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full z-10 transition-all"
             >
-              <X size={24} />
+              <X size={20} className="sm:w-6 sm:h-6" />
             </button>
 
             {/* Main Lightbox Image */}
@@ -180,31 +205,31 @@ const Hero = () => {
               <img 
                 src={images[currentImageIndex].src}
                 alt={images[currentImageIndex].alt}
-                className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+                className="w-full h-auto max-h-[70vh] sm:max-h-[80vh] object-contain rounded-lg"
               />
 
               {/* Navigation in Lightbox */}
               <button 
                 onClick={prevImage}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all"
+                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-all"
               >
-                <ChevronLeft size={28} />
+                <ChevronLeft size={20} className="sm:w-7 sm:h-7" />
               </button>
               <button 
                 onClick={nextImage}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all"
+                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-all"
               >
-                <ChevronRight size={28} />
+                <ChevronRight size={20} className="sm:w-7 sm:h-7" />
               </button>
             </div>
 
             {/* Lightbox Thumbnails */}
-            <div className="flex justify-center space-x-3 mt-4">
+            <div className="flex justify-center space-x-2 sm:space-x-3 mt-3 sm:mt-4 px-2 overflow-x-auto hide-scrollbar">
               {images.map((image, index) => (
                 <button
                   key={index}
-                  onClick={() => goToImage(index)}
-                  className={`w-20 h-20 rounded-lg overflow-hidden transition-all border-2 ${
+                  onClick={(e) => goToImage(index, e)}
+                  className={`flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded overflow-hidden transition-all border-2 ${
                     index === currentImageIndex 
                       ? 'border-amber-400 opacity-100' 
                       : 'border-white/30 opacity-70 hover:opacity-100'
@@ -220,25 +245,40 @@ const Hero = () => {
             </div>
 
             {/* Image Info */}
-            <div className="text-center mt-4 text-white">
-              <p className="text-lg font-semibold">{images[currentImageIndex].alt}</p>
-              <p className="text-gray-300 text-sm">{currentImageIndex + 1} of {images.length}</p>
+            <div className="text-center mt-3 sm:mt-4 text-white px-2">
+              <p className="text-sm sm:text-base md:text-lg font-semibold">{images[currentImageIndex].alt}</p>
+              <p className="text-gray-300 text-xs sm:text-sm">{currentImageIndex + 1} of {images.length}</p>
             </div>
           </div>
         </div>
       )}
+
+      <style jsx>{`
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        @media (max-width: 475px) {
+          .xs\\:block {
+            display: none;
+          }
+        }
+      `}</style>
     </>
   );
 };
 
 const FeatureItem = ({ icon, title, text }) => (
-  <div className="flex items-start gap-4">
-    <div className="p-2 rounded-lg bg-amber-400/10 border border-amber-400/20">
+  <div className="flex items-start gap-3 sm:gap-4">
+    <div className="p-1 sm:p-2 rounded-lg bg-amber-400/10 border border-amber-400/20 flex-shrink-0">
       {icon}
     </div>
     <div>
-      <h3 className="font-semibold text-amber-400">{title}</h3>
-      <p className="text-gray-300">{text}</p>
+      <h3 className="font-semibold text-amber-400 text-sm sm:text-base">{title}</h3>
+      <p className="text-gray-300 text-xs sm:text-sm">{text}</p>
     </div>
   </div>
 );
