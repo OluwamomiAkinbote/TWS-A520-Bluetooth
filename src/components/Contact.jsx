@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { Phone, MessageSquare, MapPin, Package, User, Send } from 'lucide-react';
 
@@ -13,6 +13,34 @@ const packages = [
 function ContactForm() {
   const [state, handleSubmit] = useForm("xzzvwlak");
   const [selectedPackage, setSelectedPackage] = useState('');
+  const [formData, setFormData] = useState({});
+
+  // Track Facebook Pixel Purchase event on successful submission
+  useEffect(() => {
+    if (state.succeeded) {
+      // Execute Facebook Pixel purchase tracking
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Purchase', {
+          value: getPackagePrice(selectedPackage),
+          currency: 'NGN',
+          content_name: selectedPackage,
+          content_type: 'product'
+        });
+      }
+    }
+  }, [state.succeeded, selectedPackage]);
+
+  // Helper function to extract price from package selection
+  const getPackagePrice = (pkg) => {
+    if (!pkg) return 0;
+    
+    const priceMatch = pkg.match(/₦(\d+,\d+|\d+)/);
+    if (priceMatch) {
+      return parseInt(priceMatch[1].replace(/,/g, ''), 10);
+    }
+    
+    return 0;
+  };
 
   if (state.succeeded) {
     return (
