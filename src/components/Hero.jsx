@@ -1,7 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Volume2, Activity, Touchpad, Headphones, Bluetooth, ChevronLeft, ChevronRight, Play, X } from 'lucide-react';
+import { 
+  Volume2, Activity, Touchpad, Headphones, Bluetooth, 
+  ChevronLeft, ChevronRight, Play, X, MessageCircle, 
+  Zap, ShoppingBag, Clock, Users, ArrowRight
+} from 'lucide-react';
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -39,6 +43,14 @@ const Hero = () => {
         block: 'start'
       });
     }
+  };
+
+  // WhatsApp order function
+  const handleWhatsAppOrder = () => {
+    const phoneNumber = "2348051230133"; // Your WhatsApp number
+    const message = `Hello! I'm interested in the TWS-A520 Wireless Earbuds. Please send me pricing and availability information.`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   const nextImage = (e) => {
@@ -170,13 +182,42 @@ const Hero = () => {
               />
             </div>
 
+            {/* Primary/Secondary Button Approach */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button 
                 onClick={handleShopNowClick}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold rounded-full hover:shadow-lg hover:shadow-amber-500/30 transition-all cursor-pointer text-sm sm:text-base"
+                className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold rounded-full hover:shadow-lg hover:shadow-amber-500/30 transition-all cursor-pointer text-sm sm:text-base flex-1 flex items-center justify-center gap-2 group"
               >
-                Shop Now
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
+                See Pricing & Buy Now
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
+              <button 
+                onClick={handleWhatsAppOrder}
+                className="px-6 sm:px-8 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white font-medium rounded-full transition-all cursor-pointer text-sm sm:text-base flex items-center justify-center gap-2"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Quick Questions?
+              </button>
+            </div>
+            <div className="mt-2 text-xs text-gray-400 text-center">
+              WhatsApp replies within 5 minutes
+            </div>
+
+            {/* Trust indicators */}
+            <div className="mt-6 flex flex-wrap gap-4 justify-center text-gray-400 text-xs sm:text-sm">
+              <span className="flex items-center">
+                <Users className="w-3 h-3 text-green-400 mr-1" />
+                2,500+ Happy Customers
+              </span>
+              <span className="flex items-center">
+                <ShoppingBag className="w-3 h-3 text-green-400 mr-1" />
+                Free Delivery in Lagos
+              </span>
+              <span className="flex items-center">
+                <Clock className="w-3 h-3 text-green-400 mr-1" />
+                30-Day Returns
+              </span>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Check, Truck, RotateCcw, ShoppingCart, Zap, Users, Crown, Star } from 'lucide-react';
+import { Check, Truck, RotateCcw, ShoppingCart, Zap, Users, Crown, Star, MessageCircle } from 'lucide-react';
 
 const packages = [
   {
@@ -91,6 +91,14 @@ export default function PackageSelection() {
       currency: 'NGN',
       minimumFractionDigits: 0,
     }).format(price).replace('NGN', '₦');
+  };
+
+  // WhatsApp order function
+  const handleWhatsAppOrder = (pkg) => {
+    const phoneNumber = "2348051230133"; // Your WhatsApp number
+    const message = `Hello! I would like to order the ${pkg.title} package for ${formatPrice(pkg.price)}. Please proceed with my order.`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   const selectedPackageData = packages.find(pkg => pkg.id === selectedPackage);
@@ -188,19 +196,31 @@ export default function PackageSelection() {
                 ))}
               </div>
 
-              {/* CTA Button */}
-              <button
-                onClick={() => handleSelectPackage(pkg.id)}
-                className={`w-full py-4 rounded-lg font-bold transition-all duration-200 ${
-                  selectedPackage === pkg.id
-                    ? 'bg-yellow-400 text-black hover:bg-yellow-300'
-                    : pkg.popular
-                    ? 'bg-yellow-400 text-black hover:bg-yellow-300'
-                    : 'bg-gray-800 text-white hover:bg-gray-700'
-                }`}
-              >
-                {selectedPackage === pkg.id ? 'Selected ✓' : 'Choose Package'}
-              </button>
+              {/* Dual CTA Buttons */}
+              <div className="space-y-3">
+                
+                {/* Regular Select Button */}
+                <button
+                  onClick={() => handleSelectPackage(pkg.id)}
+                  className={`w-full py-3 rounded-lg font-bold transition-all duration-200 ${
+                    selectedPackage === pkg.id
+                      ? 'bg-yellow-400 text-black hover:bg-yellow-300'
+                      : pkg.popular
+                      ? 'bg-yellow-400 text-black hover:bg-yellow-300'
+                      : 'bg-gray-800 text-white hover:bg-gray-700'
+                  }`}
+                >
+                  {selectedPackage === pkg.id ? 'Selected ✓' : 'Choose Package'}
+                </button>
+                {/* WhatsApp Order Button */}
+                <button
+                  onClick={() => handleWhatsAppOrder(pkg)}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-bold transition-all duration-200 flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Order on WhatsApp
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -230,15 +250,20 @@ export default function PackageSelection() {
                 </div>
               </div>
 
-              <p className="text-gray-300 text-sm text-center mb-4">
-                Scroll down to complete your order with secure payment
-              </p>
+              {/* WhatsApp CTA in Popup */}
+              <button
+                onClick={() => handleWhatsAppOrder(selectedPackageData)}
+                className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-bold mb-3 flex items-center justify-center gap-2"
+              >
+                <MessageCircle className="w-5 h-5" />
+                Order Now on WhatsApp
+              </button>
 
               <button
                 onClick={() => setShowPopup(false)}
-                className="w-full bg-yellow-400 text-black py-3 rounded-lg font-bold hover:bg-yellow-300"
+                className="w-full bg-gray-700 text-white py-3 rounded-lg font-bold hover:bg-gray-600"
               >
-                Continue to Order ↓
+                Continue Browsing
               </button>
             </div>
           </div>
