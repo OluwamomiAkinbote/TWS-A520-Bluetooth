@@ -87,7 +87,7 @@ export default function RootLayout({ children }) {
             height="1"
             width="1"
             style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=1176033614217437&ev=PageView&noscript=1"
+            src="https://www.facebook.com/tr?id=3141157446063326&ev=PageView&noscript=1"
             alt="facebook pixel"
           />
         </noscript>
