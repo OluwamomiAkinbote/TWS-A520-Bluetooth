@@ -15,10 +15,22 @@ function ContactForm() {
   const [selectedPackage, setSelectedPackage] = useState('');
   const [formData, setFormData] = useState({});
 
+  // Helper function to extract price from package selection
+  const getPackagePrice = (pkg) => {
+    if (!pkg) return 0;
+
+    const priceMatch = pkg.match(/₦(\d+,\d+|\d+)/);
+    if (priceMatch) {
+      return parseInt(priceMatch[1].replace(/,/g, ''), 10);
+    }
+
+    return 0;
+  };
+
   // Track Facebook Pixel Purchase event on successful submission
   useEffect(() => {
     if (state.succeeded) {
-      // Execute Facebook Pixel purchase tracking
+      // Fire enhanced Purchase event
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq('track', 'Purchase', {
           value: getPackagePrice(selectedPackage),
@@ -27,20 +39,13 @@ function ContactForm() {
           content_type: 'product'
         });
       }
+
+      // Inject raw fbq('track', 'Purchase') script (as extra)
+      const script = document.createElement("script");
+      script.innerHTML = `fbq('track', 'Purchase');`;
+      document.body.appendChild(script);
     }
   }, [state.succeeded, selectedPackage]);
-
-  // Helper function to extract price from package selection
-  const getPackagePrice = (pkg) => {
-    if (!pkg) return 0;
-    
-    const priceMatch = pkg.match(/₦(\d+,\d+|\d+)/);
-    if (priceMatch) {
-      return parseInt(priceMatch[1].replace(/,/g, ''), 10);
-    }
-    
-    return 0;
-  };
 
   if (state.succeeded) {
     return (

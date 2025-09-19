@@ -93,13 +93,35 @@ export default function PackageSelection() {
     }).format(price).replace('NGN', '₦');
   };
 
-  // WhatsApp order function
-  const handleWhatsAppOrder = (pkg) => {
-    const phoneNumber = "2348051230133"; // Your WhatsApp number
-    const message = `Hello! I would like to order the ${pkg.title} package for ${formatPrice(pkg.price)}. Please proceed with my order.`;
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-  };
+
+// WhatsApp order function with Pixel Purchase event
+const handleWhatsAppOrder = (pkg) => {
+  // Fire Facebook Pixel purchase event
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq("track", "Purchase", {
+      value: pkg.price,
+      currency: "NGN",
+      content_name: pkg.title,
+      content_type: "product",
+    });
+  }
+
+  // Also run the raw fbq('track', 'Purchase') script as backup
+  const script = document.createElement("script");
+  script.innerHTML = `fbq('track', 'Purchase');`;
+  document.body.appendChild(script);
+
+  // WhatsApp order redirect
+  const phoneNumber = "2348051230133"; // Your WhatsApp number
+  const message = `Hello! I would like to order the ${pkg.title} package for ${formatPrice(
+    pkg.price
+  )}. Please proceed with my order.`;
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+    message
+  )}`;
+  window.open(whatsappUrl, "_blank");
+};
+
 
   const selectedPackageData = packages.find(pkg => pkg.id === selectedPackage);
 
